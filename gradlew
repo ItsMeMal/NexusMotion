@@ -17,7 +17,14 @@ if [ ! -x "$GRADLE_HOME/bin/gradle" ]; then
     exit 1
   fi
   EXPECTED="$(awk '{print $1}' "$ZIP_FILE.sha256" | tr '[:upper:]' '[:lower:]')"
-  ACTUAL="$(sha256sum "$ZIP_FILE" | awk '{print $1}' | tr '[:upper:]' '[:lower:]')"
+  if command -v sha256sum >/dev/null 2>&1; then
+    ACTUAL="$(sha256sum "$ZIP_FILE" | awk '{print $1}' | tr '[:upper:]' '[:lower:]')"
+  elif command -v shasum >/dev/null 2>&1; then
+    ACTUAL="$(shasum -a 256 "$ZIP_FILE" | awk '{print $1}' | tr '[:upper:]' '[:lower:]')"
+  else
+    echo "sha256sum or shasum is required to verify the Gradle distribution." >&2
+    exit 1
+  fi
   if [ "$EXPECTED" != "$ACTUAL" ]; then
     rm -f "$ZIP_FILE" "$ZIP_FILE.sha256"
     echo "Gradle distribution checksum mismatch." >&2
