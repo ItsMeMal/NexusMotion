@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.itsmemal.nexusmotion"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.itsmemal.nexusmotion"
