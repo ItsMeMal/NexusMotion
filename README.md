@@ -38,7 +38,7 @@ On Linux/macOS:
 ./gradlew assembleDebug
 ```
 
-The bootstrap scripts download the pinned Gradle distribution from the official Gradle distribution host and verify its SHA-256 using the published checksum file before extraction. Android SDK Platform 35 and Build Tools 35.0.0 are used by the initial app module.
+The bootstrap scripts download the pinned Gradle distribution from the official Gradle distribution host and verify its SHA-256 using the published checksum file before extraction. Android SDK Platform 36 is required for compilation; Build Tools 35.0.0 are compatible with the configured Android Gradle Plugin.
 
 APK output:
 
